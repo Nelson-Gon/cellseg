@@ -22,7 +22,7 @@ class DataClass(Dataset):
         This allows us to load each image and its annotation by index
         """
         if torch.is_tensor(img_index):
-            idx = img_index.tolist()
+            img_index = img_index.tolist()
 
         img_name = os.path.join(self.image_dir, self.annotations_path.iloc[img_index, 0])
         image = cv2.imread(img_name)
@@ -33,7 +33,7 @@ class DataClass(Dataset):
         phase = features["region_attributes.phase"].iloc[img_index]
         # Read features as json
 
-        sample = {"image": image, "features": features, "x": x_points, "y": y_points, "phase": phase}
-        return sample
+        features_image = {"image": image, "features": features, "x": x_points, "y": y_points, "phase": phase}
+        return features_image
 
    
