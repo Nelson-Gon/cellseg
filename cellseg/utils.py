@@ -24,3 +24,4 @@ def show_images(dataset_object, stack_number=0, number=None, fig_size=(20, 20)):
         subplt = plt_figure.add_subplot(np.int(np.ceil(num_cols)), 2, index + 1)
         subplt.imshow(get_images[index], cmap="gray")
 
+

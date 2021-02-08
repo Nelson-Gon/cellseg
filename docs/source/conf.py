@@ -16,7 +16,8 @@ import os
 # -- Project information -----------------------------------------------------
 
 project = 'cellseg'
-sys.path.insert(0, os.path.abspath('../../' + project))
+# This requires adding project to it, no idea why it doesn't just work
+sys.path.insert(0, os.path.abspath('../../'+project))
 copyright = '2021, Nelson Gonzabato'
 author = 'Nelson Gonzabato'
 
