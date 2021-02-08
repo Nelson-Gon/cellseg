@@ -2,6 +2,9 @@
 
 **version 0.1.0**
 
-* Implement data loaders. 
+* Added `show_images` in `utils.py` to allow quick visualization of a given number of images from a given stack of
+images. 
 
-* Conceptualize project 
+* Implemented data loaders. 
+
+* Conceptualized project 

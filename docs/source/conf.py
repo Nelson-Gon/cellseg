@@ -10,20 +10,18 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-
-import os
 import sys
-sys.path.insert(0, os.path.abspath('.'))
-sys.path.insert(0, os.path.abspath('../'))
+import os
 
 # -- Project information -----------------------------------------------------
 
 project = 'cellseg'
+sys.path.insert(0, os.path.abspath('../../' + project))
 copyright = '2021, Nelson Gonzabato'
 author = 'Nelson Gonzabato'
 
 # The full version, including alpha/beta/rc tags
-release = '0.1.0'
+release = "0.1.0"
 
 source_suffix = ['.rst', '.md']
 
