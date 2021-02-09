@@ -39,3 +39,12 @@ You need to reduce the size of your input or use a computer with more computatio
 
 This is probably because you provided a single image and not a stacked (timelapse) image. Single images are currently
 not supported. 
+
+5. `show_images` shows distorted images. I have already used a stacked image.
+
+This is most probably because the image is of data type `uint16` which unfortunately at the time is not properly 
+handled with `PIL` yet `PIL` is required for `torch` transformations used in `data.py`. 
+
+See [also](https://github.com/python-pillow/Pillow/issues/1514), 
+[this](https://pillow.readthedocs.io/en/stable/handbook/concepts.html#concept-modes) and 
+[this](https://scikit-image.org/docs/dev/user_guide/data_types.html). 

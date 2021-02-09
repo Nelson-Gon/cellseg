@@ -19,7 +19,7 @@ class DataProcessor(Dataset):
         self.train_mask_list = sorted(glob.glob(self.train_mask_dir + "/*." + self.image_suffix))
 
     def __len__(self):
-        return len(self.train_mask_dir)
+        return len(self.train_mask_list)
 
     def transform(self, image, mask):
         """
@@ -33,7 +33,10 @@ class DataProcessor(Dataset):
         image = resize_image(image)
         mask = resize_image(mask)
         # https://discuss.pytorch.org/t/torchvision-transfors-how-to-perform-identical-transform-on-both-image-and-target/10606/7
+        """
+    
         # Random cropping
+
         i, j, h, w = transforms.RandomCrop.get_params(
             image, output_size=self.target_size)
         image = TF.crop(image, i, j, h, w)
@@ -50,25 +53,36 @@ class DataProcessor(Dataset):
             mask = TF.vflip(mask)
 
         # Transform to tensor
+        """
         image = TF.to_tensor(image)
         mask = TF.to_tensor(mask)
+
+
+
         return image, mask
 
     def __getitem__(self, img_index):
         if torch.is_tensor(img_index):
             img_index = img_index.tolist()
         if self.image_suffix == "tif":
-            final_image_train = imread(self.train_image_list[img_index], plugin="pil")
-            final_mask_train = imread(self.train_mask_list[img_index], plugin="pil")
+            final_train_image = Image.open(self.train_image_list[img_index])
+            final_train_mask = Image.open(self.train_mask_list[img_index])
         else:
-            final_image_train = imread(self.train_image_list[img_index])
-            final_mask_train = imread(self.train_mask_list[img_index])
+            # WIP: Using uint16 with PIL leads to loss of information
+            final_train_image = imread(self.train_image_list[img_index])
+            final_train_mask = imread(self.train_mask_list[img_index])
         # Convert images to PIL/Tensor
         # List comprehension since we have image stacks.
-        final_train_mask = [Image.fromarray(x.astype("uint8")) for x in final_mask_train]
-        final_train_image = [Image.fromarray(x.astype("uint8")) for x in final_image_train]
+        # uint8 distorts images but uint16 doesn't work with resizing
+        # [Image.fromarray(x.astype("uint16")) for x in final_mask_train]
+        #final_train_mask = [Image.fromarray(x) for x in final_mask_train]
+        #final_train_image = [Image.fromarray(x) for x in final_image_train]
         final_image_list = []
         final_mask_list = []
+
+
+
+
 
         for image, mask in zip(final_train_image, final_train_mask):
             image, mask = self.transform(image, mask)
