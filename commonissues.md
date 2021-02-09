@@ -34,3 +34,8 @@ To calculate the input to our dense layer, we need to consider that
 3. DefaultCPUAllocator: not enough memory
 
 You need to reduce the size of your input or use a computer with more computational power. 
+
+4. `show_images` shows blank/distorted images
+
+This is probably because you provided a single image and not a stacked (timelapse) image. Single images are currently
+not supported. 
