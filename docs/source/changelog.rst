@@ -6,6 +6,9 @@ cellseg: Quantify and Classify Cells
 
 
 * 
+  ``DataProcessor`` can now transform images to a given target size. 
+
+* 
   Renamed ``DataLoader`` class to ``DataProcessor`` to avoid conflicts with ``torch.utils.data.DataLoader``
 
 * 
