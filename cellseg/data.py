@@ -4,7 +4,7 @@ import torch
 import glob
 
 
-class DataLoader(Dataset):
+class DataProcessor(Dataset):
     def __init__(self, image_directory, image_suffix="tif"):
         self.image_directory = image_directory
         self.image_suffix = image_suffix

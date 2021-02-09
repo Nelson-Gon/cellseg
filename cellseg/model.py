@@ -12,13 +12,13 @@ class CellNet(nn.Module):
         self.pool = nn.MaxPool2d(kernel_size=2, stride=2)
 
         # Define length of flattened layer
-        # Calculating input of FCN w' = (w - f + 2p)/s + 1 where w is from inputs eg 1 * 16 * 16
-        # For a 4 by 4 kernel, after halving with max pooling and same padding --> [batch_size, 256, 254] --> 127
-        self.fc1 = nn.Linear(32 * 15 * 15, 64)  # Dense layer with output 512
+        # Calculating input of FCN w' = (w - f + 2p)/s + 1
+        # After halving with max pooling and same padding --> [batch_size, 32, 30] --> 30 /2 --> 15
+        self.fc1 = nn.Linear(32 * 15 * 15, 64)  # Dense layer with output 64
         self.drop = nn.Dropout(0.5)
 
         # input from previous layer
-        self.out = nn.Linear(64, 10)
+        self.out = nn.Linear(64, 10) # number of classes based on input
         self.act = nn.ReLU()
 
     def forward(self, x):
