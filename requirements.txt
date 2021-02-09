@@ -6,8 +6,8 @@ sphinxcontrib-htmlhelp==1.0.3
 sphinxcontrib-jsmath==1.0.1
 sphinxcontrib-qthelp==1.0.3
 sphinxcontrib-serializinghtml==1.1.4
-opencv-python==4.4.0.46
-scikit-image==0.18.1
+opencv-python>=4.2 #actual 4.4.046
+scikit-image>=0.16 #actual 0.18.1
 m2r==0.2.1
 torch==1.7.1
 torchvision==0.2.2.post3
