@@ -75,9 +75,4 @@ class DataProcessor(Dataset):
             final_image_list.append(image)
             final_mask_list.append(mask)
 
-
-
-
-        #final_train_image, final_train_mask = [self.transform(x, y) for (x, y) in (final_image_train, final_mask_train)]
-
         return {"image": final_image_list, "mask": final_mask_list, "index": img_index}
