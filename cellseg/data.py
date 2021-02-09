@@ -1,27 +1,83 @@
 from torch.utils.data import Dataset
+import torchvision.transforms.functional as TF
+import torchvision.transforms as transforms
 from skimage.io import imread
+from PIL import Image
+import numpy
 import torch
 import glob
+import random
 
 
 class DataProcessor(Dataset):
-    def __init__(self, image_directory, image_suffix="tif"):
-        self.image_directory = image_directory
+    def __init__(self, train_image_dir, train_mask_dir, target_size=(130, 130), image_suffix="tif"):
+        self.train_image_dir = train_image_dir
         self.image_suffix = image_suffix
-        self.image_list = sorted(glob.glob(self.image_directory + "/*." + self.image_suffix))
+        self.train_mask_dir = train_mask_dir
+        self.target_size = target_size
+        self.train_image_list = sorted(glob.glob(self.train_image_dir + "/*." + self.image_suffix))
+        self.train_mask_list = sorted(glob.glob(self.train_mask_dir + "/*." + self.image_suffix))
 
     def __len__(self):
-        return len(self.image_list)
+        return len(self.train_mask_dir)
+
+    def transform(self, image, mask):
+        """
+
+        :param images_list: Stacked image eg (71, 1200, 1200)
+        :param masks_list: Stacked mask eg (71, 1200, 1200)
+        :return:
+
+        """
+        resize_image = transforms.Resize(size=self.target_size)
+        image = resize_image(image)
+        mask = resize_image(mask)
+        # https://discuss.pytorch.org/t/torchvision-transfors-how-to-perform-identical-transform-on-both-image-and-target/10606/7
+        # Random cropping
+        i, j, h, w = transforms.RandomCrop.get_params(
+            image, output_size=self.target_size)
+        image = TF.crop(image, i, j, h, w)
+        mask = TF.crop(mask, i, j, h, w)
+
+        # Random horizontal flipping
+        if random.random() > 0.5:
+            image = TF.hflip(image)
+            mask = TF.hflip(mask)
+
+        # Random vertical flipping
+        if random.random() > 0.5:
+            image = TF.vflip(image)
+            mask = TF.vflip(mask)
+
+        # Transform to tensor
+        image = TF.to_tensor(image)
+        mask = TF.to_tensor(mask)
+        return image, mask
 
     def __getitem__(self, img_index):
         if torch.is_tensor(img_index):
             img_index = img_index.tolist()
         if self.image_suffix == "tif":
-            final_image = imread(self.image_list[img_index], plugin="pil")
+            final_image_train = imread(self.train_image_list[img_index], plugin="pil")
+            final_mask_train = imread(self.train_mask_list[img_index], plugin="pil")
         else:
-            final_image = imread(self.image_list[img_index])
+            final_image_train = imread(self.train_image_list[img_index])
+            final_mask_train = imread(self.train_mask_list[img_index])
+        # Convert images to PIL/Tensor
+        # List comprehension since we have image stacks.
+        final_train_mask = [Image.fromarray(x.astype("uint8")) for x in final_mask_train]
+        final_train_image = [Image.fromarray(x.astype("uint8")) for x in final_image_train]
+        final_image_list = []
+        final_mask_list = []
 
-        return {"image": final_image, "index": img_index}
+        for image, mask in zip(final_train_image, final_train_mask):
+            image, mask = self.transform(image, mask)
+            final_image_list.append(image)
+            final_mask_list.append(mask)
 
 
 
+
+        #final_train_image, final_train_mask = [self.transform(x, y) for (x, y) in (final_image_train, final_mask_train)]
+
+        return {"image": final_image_list, "mask": final_mask_list, "index": img_index}

@@ -1,9 +1,7 @@
-from cellseg.cellseg.data import *
-from cellseg.cellseg.utils import show_images
-from torchvision.transforms import ToTensor
+from cellseg.data import *
+from cellseg.utils import show_images
 
+if __name__ == "__main__":
+    test = DataProcessor(train_image_dir="D:\\train_images", train_mask_dir="D:\\train_images")
 
-test = DataLoader("D:\\train_images", image_suffix="tif")
-test[0]["image"]
-
-
+    show_images(test, number=4, target="mask")

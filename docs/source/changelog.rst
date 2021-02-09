@@ -6,6 +6,12 @@ cellseg: Quantify and Classify Cells
 
 
 * 
+  Renamed ``DataLoader`` class to ``DataProcessor`` to avoid conflicts with ``torch.utils.data.DataLoader``
+
+* 
+  Added initial simple CNN model with a single layer
+
+* 
   Added ``show_images`` in ``utils.py`` to allow quick visualization of a given number of images from a given stack of
   images. 
 
