@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from data import DataProcessor
+from skimage.filters import threshold_multiotsu, threshold_li
 
 
 def show_images(dataset_object, stack_number=0, number=None, fig_size=(20, 20), target="image"):
@@ -26,4 +27,59 @@ def show_images(dataset_object, stack_number=0, number=None, fig_size=(20, 20), 
         # Current shape is channels first, drop first dimension (channel) for viewing
         subplt.imshow(get_images[index][0, :, :], cmap="gray")
 
+
+# Thresholding methods
+# Li thresholding: Not the best for nuclei, does fairly well thresholding cells
+# Try multiotsu
+# Write a function to call the method of interest
+# https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4448323/
+# Steps: Entropy based Li threshold
+# Cluster splitting by watershed
+
+
+
+
+def get_thresholds(image, method="li"):
+    """
+
+    :param image: A stacked image of class DataProcessor
+    :param method: One of li, watershed or multiotsu
+    :return: Thresholded methods based on the method.
+
+    """
+    # Get quantiles and use as initial guesses for Li
+    final_res = []
+    for index, img in enumerate(image):
+        if method == "li":
+            quantile = np.quantile(img, 0.95)
+            threshold = threshold_li(img, initial_guess=quantile)
+            final_res.append(img > threshold)
+        else:
+            threshold = threshold_multiotsu(img)
+            regions = np.digitize(img, bins=threshold)
+            final_res.append(regions)
+
+    return final_res
+
+
+
+
+def show_thresholded(original,otsu, li, number=28):
+    """
+
+    :param original: Original Image of class DataProcessor
+    :param otsu: Otsu/watershed/li thresholded image
+    :param li: Otsu/watershed/li thresholded image
+    :param number: Frame number to view
+    :return: Three images side by side
+
+    """
+    print(f"Viewing image number {number}")
+    fig, ax = plt.subplots(ncols=3, figsize=(10, 5))
+    ax[0].imshow(original[number], cmap="gray")
+    ax[0].set_title("Original Image")
+    ax[1].imshow(li[number], cmap="gray")
+    ax[1].set_title("Li threshold")
+    ax[2].imshow(otsu[number], cmap="gray")
+    ax[2].set_title("MultiOtsu")
 
