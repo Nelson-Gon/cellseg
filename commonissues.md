@@ -45,6 +45,9 @@ not supported.
 This is most probably because the image is of data type `uint16` which unfortunately at the time is not properly 
 handled with `PIL` yet `PIL` is required for `torch` transformations used in `data.py`. 
 
+Alternatively, you may write your own data generator instead of using `DataLoader`. The image processing done in 
+`DataLoader` is specific to the dataset used in building this model. 
+
 See [also](https://github.com/python-pillow/Pillow/issues/1514), 
 [this](https://pillow.readthedocs.io/en/stable/handbook/concepts.html#concept-modes) and 
 [this](https://scikit-image.org/docs/dev/user_guide/data_types.html). 

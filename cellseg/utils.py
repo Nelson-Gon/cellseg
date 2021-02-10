@@ -27,4 +27,3 @@ def show_images(dataset_object, stack_number=0, number=None, fig_size=(20, 20), 
         subplt.imshow(get_images[index][0, :, :], cmap="gray")
 
 
-

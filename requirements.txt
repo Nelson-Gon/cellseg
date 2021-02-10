@@ -11,3 +11,4 @@ scikit-image>=0.16 #actual 0.18.1
 m2r==0.2.1
 torch==1.7.1
 torchvision==0.2.2.post3
+opencv-python==4.4.0.46

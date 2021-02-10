@@ -6,6 +6,12 @@ cellseg: Quantify and Classify Cells
 
 
 * 
+  Fixed issues with ``show_images`` showing blank images for masks (labels). 
+
+* 
+  Fixed issues with ``uint16`` not working with ``PIL``.
+
+* 
   ``DataProcessor`` can now transform images to a given target size. 
 
 * 

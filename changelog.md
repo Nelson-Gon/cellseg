@@ -2,6 +2,10 @@
 
 **version 0.1.0**
 
+* Fixed issues with `show_images` showing blank images for masks (labels). 
+
+* Fixed issues with `uint16` not working with `PIL`.
+
 * `DataProcessor` can now transform images to a given target size. 
 
 * Renamed `DataLoader` class to `DataProcessor` to avoid conflicts with `torch.utils.data.DataLoader`
