@@ -18,14 +18,19 @@ class CellNet(nn.Module):
         self.drop = nn.Dropout(0.5)
 
         # input from previous layer
-        self.out = nn.Linear(64, 10) # number of classes based on input
+        self.out = nn.Linear(64, 1) # number of classes based on input
         self.act = nn.ReLU()
 
     def forward(self, x):
         x = self.act(self.conv1(x))  # [batch_size, 32, 32, 30]
         x = self.pool(x)  # [batch_size, 32, 15, 15]
+        print(x.size())
+
         x = x.view(x.size(0), -1)  # [batch_size, 32*15*15=7200] #number of input features
+        print(x.size())
         x = self.act(self.fc1(x))  # [batch_size, 64]
+        print(x.size())
         x = self.drop(x)
+        print(x.size())
         x = self.out(x)  # [batch_size, number_predictions]
         return x
