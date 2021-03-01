@@ -6,7 +6,9 @@
 ![Travis Build](https://travis-ci.com/Nelson-Gon/cellseg.svg?branch=main)
 [![PyPI license](https://img.shields.io/pypi/l/cellseg.svg)](https://pypi.python.org/pypi/cellseg/) 
 [![Documentation Status](https://readthedocs.org/projects/cellseg/badge/?version=latest)](https://cellseg.readthedocs.io/en/latest/?badge=latest)
-[![PyPI Downloads Month](https://img.shields.io/pypi/dm/cellseg.svg)](https://pypi.python.org/pypi/cellseg/)
+[![Total Downloads](https://pepy.tech/badge/cellseg)](https://pepy.tech/project/cellseg)
+[![Monthly Downloads](https://pepy.tech/badge/cellseg/month)](https://pepy.tech/project/cellseg)
+[![Weekly Downloads](https://pepy.tech/badge/cellseg/week)](https://pepy.tech/project/cellseg)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Nelson-Gon/cellseg/graphs/commit-activity)
 [![GitHub last commit](https://img.shields.io/github/last-commit/Nelson-Gon/cellseg.svg)](https://github.com/Nelson-Gon/cellseg/commits/main)
 [![GitHub issues](https://img.shields.io/github/issues/Nelson-Gon/cellseg.svg)](https://GitHub.com/Nelson-Gon/cellseg/issues/)
@@ -50,5 +52,6 @@ python setup.py install
 **Usage**
 
 ```python
-from cellseg.data import *
+# imports data, utils, model 
+from cellseg import *
 ```

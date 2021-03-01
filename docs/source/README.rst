@@ -33,9 +33,19 @@ cellseg: Multiclass Cell Segmentation
    :alt: Documentation Status
 
 
-.. image:: https://img.shields.io/pypi/dm/cellseg.svg
-   :target: https://pypi.python.org/pypi/cellseg/
-   :alt: PyPI Downloads Month
+.. image:: https://pepy.tech/badge/cellseg
+   :target: https://pepy.tech/project/cellseg
+   :alt: Total Downloads
+
+
+.. image:: https://pepy.tech/badge/cellseg/month
+   :target: https://pepy.tech/project/cellseg
+   :alt: Monthly Downloads
+
+
+.. image:: https://pepy.tech/badge/cellseg/week
+   :target: https://pepy.tech/project/cellseg
+   :alt: Weekly Downloads
 
 
 .. image:: https://img.shields.io/badge/Maintained%3F-yes-green.svg
@@ -98,4 +108,5 @@ Or if you want to build from source
 
 .. code-block:: python
 
-   from cellseg.data import *
+   # imports data, utils, model 
+   from cellseg import *
