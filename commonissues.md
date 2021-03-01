@@ -5,7 +5,7 @@
 This may be due to calling the wrong function. A way to reproduce it is as follows:
 
 ```python
-model = MyModel()
+model = CellSeg()
 input_data = # your input data here
 output = MyModel(input_data) # This will throw the above error
 ```

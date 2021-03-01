@@ -2,8 +2,8 @@ from torch.optim import Adam, RMSprop, SGD
 from torch import nn
 from torch.utils.data import DataLoader
 from torchsummary import summary
-train_images = DataProcessor("D:\\train_images\\images", target_size=(32, 32))
-train_labels = DataProcessor("D:\\train_images\masks", dir_type="masks", target_size = (32, 32))
+train_images = DataProcessor("image_path", target_size=(32, 32))
+train_labels = DataProcessor("image_path", dir_type="masks", target_size = (32, 32))
 # Check that these are not uint16
 test_dims = train_labels[0][0]
 test_dims = test_dims.unsqueeze(0)
@@ -14,6 +14,7 @@ train_images[0][0].dtype
 train_x = DataLoader(train_images[0], batch_size=2)
 train_y = DataLoader(train_labels[0], batch_size=2)
 
+train_x.dataset
 
 # Define model
 model = CellNet()
