@@ -1,4 +1,4 @@
-# cellseg: Quantify and Classify Cells
+# cellseg: Multiclass Cell Segmentation
 
 **version 0.0.0**
 
