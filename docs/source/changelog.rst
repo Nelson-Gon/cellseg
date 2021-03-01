@@ -2,8 +2,11 @@
 cellseg: Quantify and Classify Cells
 ====================================
 
-**version 0.1.0**
+**version 0.0.0**
 
+
+* 
+  Preserve name on PyPI
 
 * 
   Fixed issues with ``show_images`` showing blank images for masks (labels). 
