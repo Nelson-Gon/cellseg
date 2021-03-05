@@ -2,6 +2,7 @@ from torch.optim import Adam, RMSprop, SGD
 from torch import nn
 from torch.utils.data import DataLoader
 from torchsummary import summary
+from utils import DataProcessor
 train_images = DataProcessor("image_path", target_size=(32, 32))
 train_labels = DataProcessor("image_path", dir_type="masks", target_size = (32, 32))
 # Check that these are not uint16

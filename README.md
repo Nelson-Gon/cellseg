@@ -1,7 +1,7 @@
 # cellseg: Multiclass Cell Segmentation 
 
 [![PyPI version](https://badge.fury.io/py/cellseg.svg)](https://badge.fury.io/py/cellseg) 
-![Stage](https://www.repostatus.org/badges/latest/active.svg)
+![Stage](https://www.repostatus.org/badges/latest/wip.svg)
 ![Test Install](https://github.com/Nelson-Gon/cellseg/workflows/Test%20Install/badge.svg)
 ![Travis Build](https://travis-ci.com/Nelson-Gon/cellseg.svg?branch=main)
 [![PyPI license](https://img.shields.io/pypi/l/cellseg.svg)](https://pypi.python.org/pypi/cellseg/) 
@@ -52,6 +52,24 @@ python setup.py install
 **Usage**
 
 ```python
-# imports data, utils, model 
-from cellseg import *
+
+from cellseg.data import DataProcessor
+from cellseg.model import CellNet
+
 ```
+
+To create a model object:
+
+```python
+my_model = CellNet()
+```
+
+To load data for training:
+
+```python
+train_data = DataProcessor("path_to_images", dir_type="image")
+```
+
+**Training**
+
+

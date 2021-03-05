@@ -2,6 +2,15 @@
 cellseg: Multiclass Cell Segmentation
 =====================================
 
+**Version 0.1.0**
+
+
+* 
+  Update docs to show that this is a work in progress.
+
+* 
+  Update docs to use explicit imports. 
+
 **version 0.0.0**
 
 

@@ -5,4 +5,5 @@ cellseg
    :maxdepth: 4
 
    data
+   model
    utils

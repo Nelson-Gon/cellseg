@@ -8,8 +8,8 @@ cellseg: Multiclass Cell Segmentation
    :alt: PyPI version
  
 
-.. image:: https://www.repostatus.org/badges/latest/active.svg
-   :target: https://www.repostatus.org/badges/latest/active.svg
+.. image:: https://www.repostatus.org/badges/latest/wip.svg
+   :target: https://www.repostatus.org/badges/latest/wip.svg
    :alt: Stage
 
 
@@ -108,5 +108,20 @@ Or if you want to build from source
 
 .. code-block:: python
 
-   # imports data, utils, model 
-   from cellseg import *
+
+   from cellseg.data import DataProcessor
+   from cellseg.model import CellNet
+
+To create a model object:
+
+.. code-block:: python
+
+   my_model = CellNet()
+
+To load data for training:
+
+.. code-block:: python
+
+   train_data = DataProcessor("path_to_images", dir_type="image")
+
+**Training**
