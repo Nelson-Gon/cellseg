@@ -17,7 +17,10 @@ import os
 
 project = 'cellseg'
 # This requires adding project to it, no idea why it doesn't just work
-sys.path.insert(0, os.path.abspath('../../'+project))
+#sys.path.insert(0, os.path.abspath('../../'+project))
+# This above probably happens only if you build docs for several projects in the same environment
+sys.path.insert(0, os.path.abspath('../../'))
+
 from cellseg.version import __version__
 copyright = '2021, Nelson Gonzabato'
 author = 'Nelson Gonzabato'
