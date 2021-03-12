@@ -18,11 +18,12 @@ import os
 project = 'cellseg'
 # This requires adding project to it, no idea why it doesn't just work
 sys.path.insert(0, os.path.abspath('../../'+project))
+from cellseg.version import __version__
 copyright = '2021, Nelson Gonzabato'
 author = 'Nelson Gonzabato'
 
 # The full version, including alpha/beta/rc tags
-release = "0.0.0"
+release = __version__
 
 source_suffix = ['.rst', '.md']
 

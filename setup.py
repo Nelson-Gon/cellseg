@@ -1,8 +1,8 @@
 from setuptools import setup, find_packages
-
+from cellseg.version import __version__
 
 setup(name='cellseg',
-      version="0.0.0",
+      version=__version__,
       description='Multiclass Cell Segmentation',
       url="http://www.github.com/Nelson-Gon/cellseg",
       download_url="https://github.com/Nelson-Gon/cytounet/archive/v0.0.0.zip",

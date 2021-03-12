@@ -6,10 +6,13 @@ cellseg: Multiclass Cell Segmentation
 
 
 * 
-  Update docs to show that this is a work in progress.
+  Versioning is now automated. 
 
 * 
-  Update docs to use explicit imports. 
+  Updated docs to show that this is a work in progress.
+
+* 
+  Updated docs to use explicit imports. 
 
 **version 0.0.0**
 

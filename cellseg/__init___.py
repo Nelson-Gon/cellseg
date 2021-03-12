@@ -8,7 +8,10 @@ MultiClass Cell Segmentation
 import os
 import sys
 
+
 sys.path.append(os.path.dirname(os.path.realpath(__file__)))
+from version import __version__
 __author__ = "Nelson Gonzabato"
-__version__ = "0.0.0".encode("ascii", "ignore").decode('ascii')
+assert isinstance(__version__, str)
+__version__ = __version__
 __all__ = ["data", "utils", "model"]
