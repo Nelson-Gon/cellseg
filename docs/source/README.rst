@@ -126,6 +126,13 @@ To load data for training:
 
 .. code-block:: python
 
-   train_data = DataProcessor(image_dir="path/to/images", label_dir="path/to/labels", image_suffix="suffix_here")
+   train_data = DataProcessor(image_dir="data/train/images", label_dir="data/train/images", image_suffix="tif")
+
+To show images or masks that the ``DataProcessor`` class found:
+
+.. code-block:: python
+
+   show_images(test, 8, target="image")
+   # Set target to mask to show labels/masks instead
 
 **Training**
