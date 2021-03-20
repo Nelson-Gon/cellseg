@@ -4,82 +4,41 @@ from .data import DataProcessor
 from skimage.filters import threshold_multiotsu, threshold_li
 
 
-def show_images(dataset_object, stack_number=0, number=None, fig_size=(20, 20), target="image"):
+def show_images(dataset_object, number=None, fig_size=(20, 20), target="image"):
     """
-
-    :param dataset_object: An object of class DataLoader
-    :param stack_number: Frame number for tiff images. Defaults to zero.
-    :param number: Number of images to plot from the frame
-    :param target: Type of images to show. One of "image" or "mask"
+    :param dataset_object: An object of class DataProcessor.
+    :param number: Number of images to plot
+    :param target: Type of images to show. One of "image" or "mask", defaults to image
     :param fig_size: Figure size, defaults to (20, 20)
-    :return: A plot showing images from the stack number chosen.
-
+    :return: A plot showing images or labels
     """
     if not isinstance(dataset_object, DataProcessor):
         raise TypeError(f"Expected an object of class DataLoader not {type(dataset_object).__name__}")
 
     plt_figure = plt.figure(figsize=fig_size)
-    get_images = dataset_object[stack_number][target]
-    get_length = get_images.shape[0] if number is None else number
-    num_cols = number / 2 if get_length % 2 == 0 else number / 3
-    for index in range(get_length):
-        subplt = plt_figure.add_subplot(np.int(np.ceil(num_cols)), 2, index + 1)
-        # Current shape is channels first, drop first dimension (channel) for viewing
-        subplt.imshow(get_images[index][0, :, :], cmap="gray")
+    try:
+        isinstance(number, int)
+        # Number should not exceed the total number of images we have
+        number <= len(dataset_object.image_list)
 
+    except TypeError as err:
+        raise
 
-# Thresholding methods
-# Li thresholding: Not the best for nuclei, does fairly well thresholding cells
-# Try multiotsu
-# Write a function to call the method of interest
-# https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4448323/
-# Steps: Entropy based Li threshold
-# Cluster splitting by watershed
-
-
-
-
-def get_thresholds(image, method="li"):
-    """
-
-    :param image: A stacked image of class DataProcessor
-    :param method: One of li, watershed or multiotsu
-    :return: Thresholded methods based on the method.
-
-    """
-    # Get quantiles and use as initial guesses for Li
-    final_res = []
-    for index, img in enumerate(image):
-        if method == "li":
-            quantile = np.quantile(img, 0.95)
-            threshold = threshold_li(img, initial_guess=quantile)
-            final_res.append(img > threshold)
-        else:
-            threshold = threshold_multiotsu(img)
-            regions = np.digitize(img, bins=threshold)
-            final_res.append(regions)
-
-    return final_res
+    else:
+        num_cols = number / 2 if number % 2 == 0 else number / 3
+        for img_index in range(number):
+            subplt = plt_figure.add_subplot( 2, np.int(np.ceil(num_cols)),img_index + 1)
+            # Current shape is channels first, drop first dimension (channel) for viewing
+            subplt.imshow(dataset_object[img_index][target][0, :, :], cmap="gray")
 
 
 
 
-def show_thresholded(original,otsu, li, number=28):
-    """
 
-    :param original: Original Image of class DataProcessor
-    :param otsu: Otsu/watershed/li thresholded image
-    :param li: Otsu/watershed/li thresholded image
-    :param number: Frame number to view
-    :return: Three images side by side
 
-    """
-    print(f"Viewing image number {number}")
-    fig, ax = plt.subplots(ncols=3, figsize=(10, 5))
-    ax[0].imshow(original[number], cmap="gray")
-    ax[0].set_title("Original Image")
-    ax[1].imshow(li[number], cmap="gray")
-    ax[1].set_title("Li threshold")
-    ax[2].imshow(otsu[number], cmap="gray")
-    ax[2].set_title("MultiOtsu")
+
+
+
+
+
 

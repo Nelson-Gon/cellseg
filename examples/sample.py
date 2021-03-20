@@ -12,9 +12,9 @@ if __name__ == "__main__":
     test = DataProcessor(image_dir="data/train/images", label_dir="data/train/masks",
                          target_size=(512, 512))
 
+    show_images(test, 6, target="image")
 
-    # show_images(test, number=4, target="mask")
-
+    show_images(test, 8, target="mask")
 
 
 

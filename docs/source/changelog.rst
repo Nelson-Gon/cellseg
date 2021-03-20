@@ -6,6 +6,14 @@ cellseg: Multiclass Cell Segmentation
 
 
 * 
+  Thresholding methods were dropped. Please use `pyautocv <https://github.com/Nelson-Gon/pyautocv>`_ or any other image 
+  processing package of your choice. 
+
+* 
+  Refactored ``show_images`` to handle follow current ``DataProcessor`` logic. Fixed a bug that caused rows and column
+  switch. 
+
+* 
   ``DataProcessor`` now returns a dictionary containing an image, its label, and index.  
 
 * 

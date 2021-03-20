@@ -8,7 +8,7 @@ import numpy
 import torch
 import glob
 import random
-# from cv2 import convertScaleAbs
+
 
 
 class DataProcessor(Dataset):
@@ -53,8 +53,8 @@ class DataProcessor(Dataset):
     def transform(self, image, mask):
         """
 
-        :param image: Stacked image eg (71, 1200, 1200)
-        :param mask: Stacked mask eg (71, 1200, 1200)
+        :param image: Image to be transformed.
+        :param mask:  Label/Mask to be transformed.
         :return: Transformed images that have been randomly cropped, flipped, and resized to the target size.
 
         """
@@ -87,6 +87,8 @@ class DataProcessor(Dataset):
         image = TF.to_tensor(image)
         mask = TF.to_tensor(mask)
         return image, mask
+
+
 
     def __getitem__(self, img_index):
         """
