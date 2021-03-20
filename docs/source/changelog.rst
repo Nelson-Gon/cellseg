@@ -6,6 +6,19 @@ cellseg: Multiclass Cell Segmentation
 
 
 * 
+  ``DataProcessor`` now returns a dictionary containing an image, its label, and index.  
+
+* 
+  Reading stacked tiff images is no longer supported for now.
+
+* 
+  ``dir_type`` was dropped in ``DataProcessor``. Only provide a directory to ``image_dir`` to process
+   images and their labels (masks). 
+
+* 
+  Added data from `cytounet <https://github.com/Nelson-Gon/cytounet>`_
+
+* 
   Versioning is now automated. 
 
 * 

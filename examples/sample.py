@@ -1,10 +1,19 @@
-from cellseg.data import *
-from cellseg.utils import show_images
+import os
+import sys
 
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+#sys.path.append(0, )
 if __name__ == "__main__":
-    test = DataProcessor(train_image_dir="path", train_mask_dir="path", target_size=(512, 512))
 
-    show_images(test, number=4, target="mask")
+    from cellseg.data import *
+    from cellseg.utils import show_images
+
+    test = DataProcessor(image_dir="data/train/images", label_dir="data/train/masks",
+                         target_size=(512, 512))
+
+
+    # show_images(test, number=4, target="mask")
 
 
 

@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from data import DataProcessor
+from .data import DataProcessor
 from skimage.filters import threshold_multiotsu, threshold_li
 
 

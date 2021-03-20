@@ -46,6 +46,8 @@ python setup.py install
 
 - [ ] Modify model weights/layers
 
+- [ ] Read stacked tiff images/videos 
+
 
 
 
@@ -55,7 +57,7 @@ python setup.py install
 
 from cellseg.data import DataProcessor
 from cellseg.model import CellNet
-
+from cellseg.utils import * 
 ```
 
 To create a model object:
@@ -67,7 +69,7 @@ my_model = CellNet()
 To load data for training:
 
 ```python
-train_data = DataProcessor("path_to_images", dir_type="image")
+train_data = DataProcessor(image_dir="path/to/images", label_dir="path/to/labels", image_suffix="suffix_here")
 ```
 
 **Training**
