@@ -8,7 +8,7 @@ import numpy
 import torch
 import glob
 import random
-from cv2 import convertScaleAbs
+# from cv2 import convertScaleAbs
 
 
 class DataProcessor(Dataset):

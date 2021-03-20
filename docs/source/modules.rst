@@ -6,4 +6,6 @@ cellseg
 
    data
    model
+   training
    utils
+   version

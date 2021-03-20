@@ -10,25 +10,24 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-import sys
 import os
+import sys
+
+
+sys.path.insert(1, os.path.abspath('../../'))
+
+from cellseg.version import __version__
 
 # -- Project information -----------------------------------------------------
 
 project = 'cellseg'
-# This requires adding project to it, no idea why it doesn't just work
-#sys.path.insert(0, os.path.abspath('../../'+project))
-# This above probably happens only if you build docs for several projects in the same environment
-sys.path.insert(0, os.path.abspath('../../'))
-
-from cellseg.version import __version__
 copyright = '2021, Nelson Gonzabato'
 author = 'Nelson Gonzabato'
 
 # The full version, including alpha/beta/rc tags
 release = __version__
 
-source_suffix = ['.rst', '.md']
+source_formats = [".rst", ".md"]
 
 # -- General configuration ---------------------------------------------------
 
@@ -36,7 +35,6 @@ source_suffix = ['.rst', '.md']
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = ['sphinx.ext.todo', 'sphinx.ext.viewcode', 'sphinx.ext.autodoc']
-
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
@@ -44,6 +42,7 @@ templates_path = ['_templates']
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = []
+
 
 # -- Options for HTML output -------------------------------------------------
 
@@ -55,4 +54,5 @@ html_theme = 'alabaster'
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = []
+html_static_path = ["_static"]
+

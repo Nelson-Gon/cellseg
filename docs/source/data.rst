@@ -1,7 +1,7 @@
 data module
 ===========
 
-.. automodule:: data
+.. automodule:: cellseg.data
    :members:
    :undoc-members:
    :show-inheritance:
