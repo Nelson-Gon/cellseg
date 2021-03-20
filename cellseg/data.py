@@ -34,21 +34,19 @@ class DataProcessor(Dataset):
         self.image_list = sorted(glob.glob(self.image_dir + "/*." + self.image_suffix))
         self.label_list = sorted(glob.glob(self.label_dir + "/*." + self.image_suffix))
 
+        try:
+            assert len(self.image_list) == len(self.label_list)
+        except AssertionError:
+            raise AssertionError(f"Found {len(self.image_list)} images but {len(self.label_list)} labels.")
+        else:
+            pass
+
+    @property
     def __len__(self):
+        """
+        :return: Number of images found.
+        """
         return len(self.image_list)
-
-    # def to_uint8(self, image):
-    # This was useful in the original idea of this project. It is no longer necessary
-    # This code is left here, commented out for legacy reasons.
-    #     if self.dir_type == "mask":
-    #         uint8_img = convertScaleAbs(image, alpha=255.0 / 65535.0)
-    #     else:
-    #         uint8_img = convertScaleAbs(image)
-    #
-    #     return uint8_img
-
-
-
 
     def transform(self, image, mask):
         """
@@ -60,7 +58,7 @@ class DataProcessor(Dataset):
         """
         # https://discuss.pytorch.org/t/torchvision-transfors-how-to-perform-identical-transform-on-both-image-and-target/10606/7
 
-        # Random cropping
+
         resize_image = transforms.Resize(size=self.target_size)
         image = resize_image(image)
         mask = resize_image(mask)
@@ -72,17 +70,15 @@ class DataProcessor(Dataset):
         image = TF.crop(image, i, j, h, w)
         mask = TF.crop(mask, i, j, h, w)
 
-        # Random horizontal flipping
+
         if random.random() > 0.5:
             image = TF.hflip(image)
             mask = TF.hflip(mask)
 
-        # Random vertical flipping
+
         if random.random() > 0.5:
             image = TF.vflip(image)
             mask = TF.vflip(mask)
-
-        # Transform to tensor
 
         image = TF.to_tensor(image)
         mask = TF.to_tensor(mask)
@@ -105,15 +101,6 @@ class DataProcessor(Dataset):
         final_image = imread(self.image_list[img_index], plugin=use_plugin)
         final_label = imread(self.label_list[img_index], plugin=use_plugin)
 
-
-        # --Legacy comments----
-        # # Convert images to PIL/Tensor
-        # # List comprehension since we have image stacks.
-        # # uint16 doesn't work with resizing --> convert to uint8 but preserve information
-        # # Given the data, masks do not work well with alpha scaling
-        # return list(map(lambda x: self.transform(Image.fromarray(self.to_uint8(x))), final_images))
-        # ----------------
-        # Transform
         image, mask = self.transform(Image.fromarray(final_image), Image.fromarray(final_label))
         return {"image": image, "mask": mask, "index": img_index}
 

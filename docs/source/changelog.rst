@@ -6,6 +6,9 @@ cellseg: Multiclass Cell Segmentation
 
 
 * 
+  ``DataProcessor`` now errors if image and mask/label lengths differ. 
+
+* 
   Thresholding methods were dropped. Please use `pyautocv <https://github.com/Nelson-Gon/pyautocv>`_ or any other image 
   processing package of your choice. 
 
