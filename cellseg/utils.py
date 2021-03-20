@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from .data import DataProcessor
-from skimage.filters import threshold_multiotsu, threshold_li
+
 
 
 def show_images(dataset_object, number=None, fig_size=(20, 20), target="image"):

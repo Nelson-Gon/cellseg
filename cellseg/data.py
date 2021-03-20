@@ -12,7 +12,7 @@ import random
 
 
 class DataProcessor(Dataset):
-    def __init__(self, image_dir, label_dir, dir_type="image", target_size=(512, 512), image_suffix="tif"):
+    def __init__(self, image_dir, label_dir,target_size=(512, 512), image_suffix="tif"):
         """
 
         :param image_dir: Path to image directory.
