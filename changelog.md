@@ -3,6 +3,8 @@
 
 **Version 0.1.0**
 
+* Added data from [cytounet](https://github.com/Nelson-Gon/cytounet)
+
 * Versioning is now automated. 
 
 * Updated docs to show that this is a work in progress.
