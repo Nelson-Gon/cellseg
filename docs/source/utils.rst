@@ -1,7 +1,7 @@
 utils module
 ============
 
-.. automodule:: utils
+.. automodule:: cellseg.utils
    :members:
    :undoc-members:
    :show-inheritance:
