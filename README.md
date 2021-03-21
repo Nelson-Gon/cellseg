@@ -2,7 +2,8 @@
 
 [![PyPI version](https://badge.fury.io/py/cellseg.svg)](https://badge.fury.io/py/cellseg) 
 ![Stage](https://www.repostatus.org/badges/latest/wip.svg)
-![Test Install](https://github.com/Nelson-Gon/cellseg/workflows/Test%20Install/badge.svg)
+[![Codecov](https://codecov.io/gh/Nelson-Gon/cellseg/branch/main/graph/badge.svg)](https://codecov.io/gh/Nelson-Gon/cellseg?branch=main)
+![Test-Package](https://github.com/Nelson-Gon/cellseg/workflows/Test-Package/badge.svg)
 ![Travis Build](https://travis-ci.com/Nelson-Gon/cellseg.svg?branch=main)
 [![PyPI license](https://img.shields.io/pypi/l/cellseg.svg)](https://pypi.python.org/pypi/cellseg/) 
 [![Documentation Status](https://readthedocs.org/projects/cellseg/badge/?version=latest)](https://cellseg.readthedocs.io/en/latest/?badge=latest)
@@ -18,7 +19,7 @@
 
 
 
-`cellseg` is a PyTorch (`torch`) based deep learning package aimed at multiclass cell segmentation.
+`cellseg` is a PyTorch (`torch`) based deep learning package aimed at multiclass cell segmentation. 
 
 **Installation**
 

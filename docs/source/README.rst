@@ -13,9 +13,14 @@ cellseg: Multiclass Cell Segmentation
    :alt: Stage
 
 
-.. image:: https://github.com/Nelson-Gon/cellseg/workflows/Test%20Install/badge.svg
-   :target: https://github.com/Nelson-Gon/cellseg/workflows/Test%20Install/badge.svg
-   :alt: Test Install
+.. image:: https://codecov.io/gh/Nelson-Gon/cellseg/branch/main/graph/badge.svg
+   :target: https://codecov.io/gh/Nelson-Gon/cellseg?branch=main
+   :alt: Codecov
+
+
+.. image:: https://github.com/Nelson-Gon/cellseg/workflows/Test-Package/badge.svg
+   :target: https://github.com/Nelson-Gon/cellseg/workflows/Test-Package/badge.svg
+   :alt: Test-Package
 
 
 .. image:: https://travis-ci.com/Nelson-Gon/cellseg.svg?branch=main
@@ -70,7 +75,7 @@ cellseg: Multiclass Cell Segmentation
 
 **Introduction**
 
-``cellseg`` is a PyTorch (\ ``torch``\ ) based deep learning package aimed at multiclass cell segmentation.
+``cellseg`` is a PyTorch (\ ``torch``\ ) based deep learning package aimed at multiclass cell segmentation. 
 
 **Installation**
 

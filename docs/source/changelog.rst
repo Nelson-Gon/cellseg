@@ -6,6 +6,9 @@ cellseg: Multiclass Cell Segmentation
 
 
 * 
+  Initial tests. 
+
+* 
   ``DataProcessor`` now errors if image and mask/label lengths differ. 
 
 * 
