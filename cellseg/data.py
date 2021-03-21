@@ -4,7 +4,6 @@ import torchvision.transforms.functional as TF
 import torchvision.transforms as transforms
 from skimage.io import imread
 from PIL import Image
-import numpy
 import torch
 import glob
 import random
@@ -32,6 +31,8 @@ class DataProcessor(Dataset):
         self.label_dir = label_dir
         self.image_suffix = image_suffix
         self.target_size = target_size
+
+
 
 
         # Assert that directories actually exist

@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-import numpy as np
+from math import ceil
 from .data import DataProcessor
 
 
@@ -24,7 +24,7 @@ def show_images(dataset_object, number=None, fig_size=(20, 20), target="image"):
         plt_figure = plt.figure(figsize=fig_size)
         num_cols = number / 2 if number % 2 == 0 else number / 3
         for img_index in range(number):
-            subplt = plt_figure.add_subplot( 2, np.int(np.ceil(num_cols)),img_index + 1)
+            subplt = plt_figure.add_subplot( 2, int(ceil(num_cols)),img_index + 1)
             # Current shape is channels first, drop first dimension (channel) for viewing
             subplt.imshow(dataset_object[img_index][target][0, :, :], cmap="gray")
 
