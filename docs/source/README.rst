@@ -18,9 +18,9 @@ cellseg: Multiclass Cell Segmentation
    :alt: Codecov
 
 
-.. image:: https://github.com/Nelson-Gon/cellseg/workflows/Test-Package/badge.svg
-   :target: https://github.com/Nelson-Gon/cellseg/workflows/Test-Package/badge.svg
-   :alt: Test-Package
+.. image:: https://github.com/Nelson-Gon/cellseg/actions/workflows/build-package.yaml/badge.svg
+   :target: https://github.com/Nelson-Gon/cellseg/actions/workflows/build-package.yaml
+   :alt: Test Install
 
 
 .. image:: https://travis-ci.com/Nelson-Gon/cellseg.svg?branch=main
