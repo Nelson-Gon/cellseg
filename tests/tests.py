@@ -2,6 +2,7 @@ import unittest
 import os
 from cellseg.data import DataProcessor
 from cellseg.utils import show_images
+from unittest import mock
 # Create Paths to test files -- data here
 
 # Get directory name one level up
@@ -76,6 +77,32 @@ class cellsegTests(unittest.TestCase):
         self.assertEqual(first_index_image.shape[-1], 256)
         self.assertEqual(first_index_mask.shape[-1], 256)
         self.assertEqual(first_index["index"], 0)
+
+    def test_utils(self):
+        with self.assertRaises(ValueError) as err:
+            show_images(dataset_object, number = 42)
+        self.assertEqual(str(err.exception),"number should be an int and less than or equal to 10 not 42")
+        # Ensure that we only have image and mask in target
+        # There must be a way to not repeat these steps and test at once
+        with self.assertRaises(ValueError) as err:
+            show_images(dataset_object, number = 8, target="gibberish")
+
+        self.assertEqual(str(err.exception), "Target should be one of image or mask not gibberish")
+
+        # Check that we provide the right data type
+        with self.assertRaises(TypeError) as err:
+            show_images("not a DataProcessor object", number = 4)
+
+        self.assertEqual(str(err.exception),"Expected an object of class DataProcessor not str")
+
+
+    # Mock plots
+    @mock.patch("cellseg.utils.plt")
+    def test_plots(self, mock_plt):
+        show_images(dataset_object, number = 4)
+        mock_plt.cmap.called_once_with("gray")
+        mock_plt.figure.called_once()
+        # mock_plt.figure().add_subplot.assert_called_once()
 
 
 if __name__ == "__main__":
