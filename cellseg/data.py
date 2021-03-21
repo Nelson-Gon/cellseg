@@ -38,12 +38,17 @@ class DataProcessor(Dataset):
         if not all(os.path.isdir(x) for x in (self.label_dir, self.image_dir)):
             raise NotADirectoryError("One or both directories do not exist.")
 
+        # raise typeerror at instance creation
+        if not isinstance(self.target_size, tuple):
+            raise TypeError(f"Target size should be a tuple not {type(self.target_size).__name__}")
 
         self.image_list = sorted(glob.glob(self.image_dir + "/*." + self.image_suffix))
         self.label_list = sorted(glob.glob(self.label_dir + "/*." + self.image_suffix))
 
         if len(self.image_list) != len(self.label_list):
-            raise ValueError(f"Found {len(self.image_list)} images but {len(self.label_list)} labels.")
+            no_images = "image" if len(self.image_list) == 1 else "images"
+            no_labels = "label" if len(self.label_list) == 1 else "labels"
+            raise ValueError(f"Found {len(self.image_list)} {no_images} but {len(self.label_list)} {no_labels}.")
 
 
     @property
@@ -62,6 +67,7 @@ class DataProcessor(Dataset):
 
         """
         # https://discuss.pytorch.org/t/torchvision-transfors-how-to-perform-identical-transform-on-both-image-and-target/10606/7
+
 
 
         resize_image = transforms.Resize(size=self.target_size)
