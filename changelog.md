@@ -3,6 +3,8 @@
 
 **Version 0.1.0**
 
+* Initial tests. 
+
 * `DataProcessor` now errors if image and mask/label lengths differ. 
 
 * Thresholding methods were dropped. Please use [pyautocv](https://github.com/Nelson-Gon/pyautocv) or any other image 

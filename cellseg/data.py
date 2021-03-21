@@ -8,6 +8,7 @@ import numpy
 import torch
 import glob
 import random
+import os
 
 
 
@@ -31,15 +32,19 @@ class DataProcessor(Dataset):
         self.label_dir = label_dir
         self.image_suffix = image_suffix
         self.target_size = target_size
+
+
+        # Assert that directories actually exist
+        if not all(os.path.isdir(x) for x in (self.label_dir, self.image_dir)):
+            raise NotADirectoryError("One or both directories do not exist.")
+
+
         self.image_list = sorted(glob.glob(self.image_dir + "/*." + self.image_suffix))
         self.label_list = sorted(glob.glob(self.label_dir + "/*." + self.image_suffix))
 
-        try:
-            assert len(self.image_list) == len(self.label_list)
-        except AssertionError:
-            raise AssertionError(f"Found {len(self.image_list)} images but {len(self.label_list)} labels.")
-        else:
-            pass
+        if len(self.image_list) != len(self.label_list):
+            raise ValueError(f"Found {len(self.image_list)} images but {len(self.label_list)} labels.")
+
 
     @property
     def __len__(self):
