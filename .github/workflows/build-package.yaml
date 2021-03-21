@@ -1,8 +1,8 @@
 name: Test Install
 
 on:
-  push:         {branches: [main]}
-  pull_request: {branches: [main]}
+  push:         {branches: [main, dev]}
+  pull_request: {branches: [main, dev]}
 
 
 
@@ -29,7 +29,12 @@ jobs:
 
     - name: Install package
       run: python3 setup.py install
-    
+
+    - name: Run tests and show coverage
+      run: coverage run tests/tests.py && coverage report -m
+
+    - name: Upload coverage to codecov
+      run: bash <(curl -s https://codecov.io/bash)
 
 
 
