@@ -3,11 +3,17 @@
 
 **Version 0.1.0**
 
+* Initialized script mode. 
+
+* Optimized imports 
+
+* Updated docs to reflect proper DataProcessor usage. 
+
 * Initial tests. 
 
 * `DataProcessor` now errors if image and mask/label lengths differ. 
 
-* Thresholding methods were dropped. Please use [pyautocv](https://github.com/Nelson-Gon/pyautocv) or any other image 
+* Dropped thresholding methods. Please use [pyautocv](https://github.com/Nelson-Gon/pyautocv) or any other image 
 processing package of your choice. 
 
 * Refactored `show_images` to handle follow current `DataProcessor` logic. Fixed a bug that caused rows and column
@@ -17,8 +23,7 @@ switch.
 
 * Reading stacked tiff images is no longer supported for now.
 
-* `dir_type` was dropped in `DataProcessor`. Only provide a directory to `image_dir` to process
-   images and their labels (masks). 
+* `dir_type` was dropped in `DataProcessor`. Only provide a directory to `image_dir` containing images and masks. 
 
 * Added data from [cytounet](https://github.com/Nelson-Gon/cytounet)
 

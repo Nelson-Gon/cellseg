@@ -1,6 +1,6 @@
 # DataProcessor
-from torch.utils.data import Dataset
-import torchvision.transforms.functional as TF
+import torch.utils.data
+from torchvision.transforms.functional import to_tensor, hflip, vflip, crop
 import torchvision.transforms as transforms
 from skimage.io import imread
 from PIL import Image
@@ -10,9 +10,8 @@ import random
 import os
 
 
-
-class DataProcessor(Dataset):
-    def __init__(self, image_dir, label_dir,target_size=(512, 512), image_suffix="tif"):
+class DataProcessor(torch.utils.data.Dataset):
+    def __init__(self, image_dir, label_dir, target_size=(512, 512), image_suffix="tif"):
         """
 
         :param image_dir: Path to image directory.
@@ -32,9 +31,6 @@ class DataProcessor(Dataset):
         self.image_suffix = image_suffix
         self.target_size = target_size
 
-
-
-
         # Assert that directories actually exist
         if not all(os.path.isdir(x) for x in (self.label_dir, self.image_dir)):
             raise NotADirectoryError("One or both directories do not exist.")
@@ -50,7 +46,6 @@ class DataProcessor(Dataset):
             no_images = "image" if len(self.image_list) == 1 else "images"
             no_labels = "label" if len(self.label_list) == 1 else "labels"
             raise ValueError(f"Found {len(self.image_list)} {no_images} but {len(self.label_list)} {no_labels}.")
-
 
     @property
     def __len__(self):
@@ -69,34 +64,26 @@ class DataProcessor(Dataset):
         """
         # https://discuss.pytorch.org/t/torchvision-transfors-how-to-perform-identical-transform-on-both-image-and-target/10606/7
 
-
-
         resize_image = transforms.Resize(size=self.target_size)
         image = resize_image(image)
         mask = resize_image(mask)
 
-
-
         i, j, h, w = transforms.RandomCrop.get_params(
             image, output_size=self.target_size)
-        image = TF.crop(image, i, j, h, w)
-        mask = TF.crop(mask, i, j, h, w)
-
-
-        if random.random() > 0.5:
-            image = TF.hflip(image)
-            mask = TF.hflip(mask)
-
+        image = crop(image, i, j, h, w)
+        mask = crop(mask, i, j, h, w)
 
         if random.random() > 0.5:
-            image = TF.vflip(image)
-            mask = TF.vflip(mask)
+            image = hflip(image)
+            mask = hflip(mask)
 
-        image = TF.to_tensor(image)
-        mask = TF.to_tensor(mask)
+        if random.random() > 0.5:
+            image = vflip(image)
+            mask = vflip(mask)
+
+        image = to_tensor(image)
+        mask = to_tensor(mask)
         return image, mask
-
-
 
     def __getitem__(self, img_index):
         """
@@ -115,7 +102,3 @@ class DataProcessor(Dataset):
 
         image, mask = self.transform(Image.fromarray(final_image), Image.fromarray(final_label))
         return {"image": image, "mask": mask, "index": img_index}
-
-
-
-
